@@ -56,7 +56,7 @@ fun main() = runBlocking {
     }
 }
 
-private fun buildExecutor(): Pair<MultiLLMPromptExecutor, LLModel> {
+fun buildExecutor(): Pair<MultiLLMPromptExecutor, LLModel> {
     val httpFactory = KtorKoogHttpClient.Factory()
 
     System.getenv("GOOGLE_API_KEY")?.takeIf { it.isNotBlank() }?.let { key ->

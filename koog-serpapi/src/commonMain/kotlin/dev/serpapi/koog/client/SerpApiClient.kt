@@ -43,6 +43,7 @@ class SerpApiClient(
     private val apiKey: String,
     private val baseUrl: String = DEFAULT_BASE_URL,
     private val http: HttpClient = defaultHttpClient(),
+    private val onEngineCall: ((SerpEngine) -> Unit)? = null,
 ) {
     init {
         require(apiKey.isNotBlank()) { "SerpApi API key must not be blank" }
@@ -50,6 +51,7 @@ class SerpApiClient(
 
     /** Run any engine with raw string parameters and get the untouched JSON back. */
     suspend fun raw(engine: SerpEngine, params: Map<String, String> = emptyMap()): JsonObject {
+        onEngineCall?.invoke(engine)
         val response = http.get("$baseUrl/search") {
             parameter("engine", engine.engine)
             parameter("api_key", apiKey)

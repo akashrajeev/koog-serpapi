@@ -112,6 +112,11 @@ const go = document.getElementById('go');
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function md(src) {
   let h = esc(src);
+  h = h.replace(/\[\[(https?:[^\]\s]+)\]\]|\[(https?:[^\]\s]+)\]/g, (m, a, b) => {
+    const u = a || b;
+    let d = u; try { d = new URL(u).hostname.replace(/^www\./, ''); } catch (e) {}
+    return '<a href="' + u + '" target="_blank" rel="noopener">' + d + '</a>';
+  });
   h = h.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   h = h.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
   const lines = h.split(/\n{2,}/).map(block => {

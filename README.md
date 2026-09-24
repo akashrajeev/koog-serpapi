@@ -1,5 +1,9 @@
 # koog-serpapi
 
+[![CI](https://github.com/akashrajeev/koog-serpapi/actions/workflows/ci.yml/badge.svg)](https://github.com/akashrajeev/koog-serpapi/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+[![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin-Multiplatform-7f52ff.svg)](https://kotlinlang.org/docs/multiplatform.html)
+
 Live search data tools for [Koog](https://github.com/JetBrains/koog), JetBrains' Kotlin agent framework — powered by [SerpApi](https://serpapi.com).
 
 Koog ships no web-search tooling out of the box: today, Koog developers hand-roll HTTP calls to a search provider. `koog-serpapi` closes that gap with an idiomatic Kotlin library: a typed, multiplatform SerpApi client plus a ready-made Koog `ToolRegistry` that gives any Koog agent live access to Google Search, Maps, Shopping, Flights, Scholar and News in one line.
@@ -68,6 +72,14 @@ Engines covered: `google`, `google_maps`, `google_shopping`, `google_flights`, `
 - `koog-serpapi/` — the library (Kotlin Multiplatform, JVM target verified)
 - `demo/` — a runnable research-assistant agent using the library
 
+## The demo in action
+
+A Koog agent wired to `SerpApiTools` behind a small chat UI. Each answer names the SerpApi engines it used:
+
+![koog-serpapi demo answering with live SerpApi data](docs/demo.png)
+
+Short screen capture: [docs/demo.mp4](docs/demo.mp4) (real answers from live SerpApi calls).
+
 ## Run the demo
 
 Requirements: JDK 17+, a [SerpApi key](https://serpapi.com/manage_api_key) (free tier is 250 searches/month), and one LLM key.
@@ -75,7 +87,8 @@ Requirements: JDK 17+, a [SerpApi key](https://serpapi.com/manage_api_key) (free
 ```bash
 export SERPAPI_API_KEY=...
 export GOOGLE_API_KEY=...        # Gemini (gemini-2.5-flash)
-./gradlew :demo:run
+./gradlew :demo:run              # web demo at http://localhost:8080
+# or: ./gradlew :demo:runCli     # same agent in your terminal
 ```
 
 Or use any OpenAI-compatible provider instead of Gemini:

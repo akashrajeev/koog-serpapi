@@ -80,6 +80,8 @@ A Koog agent wired to `SerpApiTools` behind a small chat UI. Each answer names t
 
 Short screen capture: [docs/demo.mp4](docs/demo.mp4) (real answers from live SerpApi calls).
 
+Demo video (12 s, sped up, running locally): https://youtu.be/pU7UZwamcAk
+
 ## Run the demo
 
 Requirements: JDK 17+, a [SerpApi key](https://serpapi.com/manage_api_key) (free tier is 250 searches/month), and one LLM key.
@@ -124,6 +126,15 @@ Unit tests run against a Ktor `MockEngine` with fixture payloads — no SerpApi 
 - HTTP errors (401/429/...) become `SerpApiException` with the status code and SerpApi's own error message.
 - Body-level errors (HTTP 200 with `{"error": ...}`) are detected and thrown, not parsed as results.
 - A blank API key fails fast at client construction.
+
+## Hackathon notes
+
+- SerpApi India Hackathon 2026, track: Open-Source Integrations
+- New project, started in September 2026.
+
+## AI tools used
+
+Built with an AI coding agent (Instinct) for code, tests and documentation. Design and review by Akash Rajeev.
 
 ## License
 
